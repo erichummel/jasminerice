@@ -653,13 +653,17 @@ beforeEach(function() {
     }
   })
   jasmine.getEnv().addEqualityTester(function(a, b) {
-    if(a instanceof jQuery && b instanceof jQuery) {
-      if(a.size() != b.size()) {
-        return jasmine.undefined;
+    try{
+      if(a instanceof jQuery && b instanceof jQuery) {
+        if(a.size() != b.size()) {
+          return jasmine.undefined;
+        }
+        else if(a.is(b)) {
+          return true;
+        }
       }
-      else if(a.is(b)) {
-        return true;
-      }
+    }catch(error){
+
     }
     return jasmine.undefined;
 
